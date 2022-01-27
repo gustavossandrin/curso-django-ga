@@ -20,6 +20,7 @@ jobs:
       run: |
         pip install pipenv codecov
         pipenv sync --dev
+        cp contrib/env-sample .env
     - name: Verificar a qualidade do código com Flake8
       uses: py-actions/flake8@v1
       with:
