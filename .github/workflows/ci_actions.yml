@@ -26,7 +26,7 @@ jobs:
         checkName: 'flake8_py3'
     - name: Rodar os testes no GitHubActions
       run: |
-        pipenv run pytest pypro
+        pipenv run pytest --cov=pypro
     - name: Relatório Coverage
       env:
         CODECOV_TOKEN: 'a72bb601-926d-452a-b4cd-d5b1439a9d39'
