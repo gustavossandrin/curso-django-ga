@@ -27,8 +27,9 @@ jobs:
     - name: Rodar os testes no GitHubActions
       run: |
         pipenv run pytest pypro
-    - name: Relatório Coverage
-      env:
-        CODECOV_TOKEN: 'a72bb601-926d-452a-b4cd-d5b1439a9d39'
+    - name: Run tests and collect coverage
       run: |
-        pipenv run codecov
+        coverage run tests.py
+        coverage xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
