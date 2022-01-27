@@ -1,37 +1,35 @@
-name: CI
+name: Instalando os requisitos do Projeto
 
-on: [push]  #,pull_request
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-    env:
-      PIPENV_NO_INHERIT: 1
-      PIPENV_IGNORE_VIRTUALENVS: 1
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v1
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        python-version: 3.9
-
+        python-version: '3.9.7'
     - name: Install dependencies
       run: |
-        pip install pipenv
+        pip install pipenv codecov
         pipenv sync --dev
         cp contrib/env-sample .env
-
-    - name: Lint with flake8
-      run: |
-        pipenv run flake8 .
-
-    - name: Test with pytest
+    - name: Verificar a qualidade do código com Flake8
+      uses: py-actions/flake8@v1
+      with:
+        checkName: 'flake8_py3'
+    - name: Rodar os testes no GitHubActions
       run: |
         pipenv run pytest --cov=pypro
-
-    - name: Posting Coverage
+    - name: Relatório Coverage
       env:
         CODECOV_TOKEN: 'a72bb601-926d-452a-b4cd-d5b1439a9d39'
-        run: |
-          pipenv run codecov
+      run: |
+        pipenv run codecov
