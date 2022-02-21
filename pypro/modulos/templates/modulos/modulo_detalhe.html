@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block title %}modulo.titulo{% endblock title %}
+{% block title %}{{modulo.titulo}}{% endblock title %}
 {% block description %}página com detalhes do módulo {{ modulo.titulo }}{% endblock description %}
 {% block body %}
   <div class="container">
@@ -21,6 +21,5 @@
             </ol>
         </div>
     </div>
-
 {% endblock body %}
       
