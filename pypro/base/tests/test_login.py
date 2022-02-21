@@ -23,6 +23,7 @@ def usuario(db, django_user_model):
     usuario_modelo.senha_plana = senha
     return usuario_modelo
 
+
 @pytest.fixture
 def resp_post(client, usuario):
     return client.post(reverse('login'), {'username': usuario.email, 'password': usuario.senha_plana})
@@ -45,9 +46,11 @@ def test_botar_entrar_disponivel(resp_home):
 def test_link_de_login_disponivel(resp_home):
     assert_contains(resp_home, reverse('login'))
 
+
 @pytest.fixture
 def resp_home_com_usuario_logado(client_com_usuario_logado, db):
     return client_com_usuario_logado.get(reverse('base:home'))
+
 
 def test_botar_entrar_indisponivel(resp_home_com_usuario_logado):
     assert_not_contains(resp_home_com_usuario_logado, 'Entrar')
