@@ -57,4 +57,9 @@ def test_link_de_login_indisponivel(resp_home_com_usuario_logado):
     assert_not_contains(resp_home_com_usuario_logado, reverse('login'))
 
 
+def test_botar_sair_disponivel(resp_home_com_usuario_logado):
+    assert_contains(resp_home_com_usuario_logado, 'Sair')
 
+
+def test_nome_usuario_logado_disponivel(resp_home_com_usuario_logado, usuario_logado):
+    assert_contains(resp_home_com_usuario_logado, usuario_logado.first_name)
